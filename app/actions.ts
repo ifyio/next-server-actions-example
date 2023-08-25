@@ -1,9 +1,11 @@
 'use server'
 
-import { query } from '@/lib/next-server-action/query'
-import { mutation } from '@/lib/next-server-action/mutation'
-import { revalidate } from '@/lib/next-server-action/revalidate'
+import { query } from '@/lib/next-server-query/query'
+import { mutation } from '@/lib/next-server-query/mutation'
+import { ArgsMatch } from './decorators/args-match'
+import { revalidate } from '@/lib/next-server-query/revalidate'
 import { todoService } from './services'
+import { ClearTodoArgs, ClearTodoArgsSchema } from './schemas'
 
 export const getTodos = query({
   tag: 'todos',
@@ -26,12 +28,8 @@ export const deleteTodo = mutation({
   },
 })
 
-export type ClearTodoArgs = {
-  id: string
-  isDone: boolean
-}
-
 export const clearTodo = mutation({
+  decorators: [ArgsMatch(ClearTodoArgsSchema)],
   action: async (args: ClearTodoArgs) => {
     await todoService.clearTodo(args)
     revalidate(getTodos)

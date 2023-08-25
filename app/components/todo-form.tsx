@@ -4,9 +4,9 @@ import tw from 'tailwind-styled-components'
 import { addTodo } from '../actions'
 import { Spinner } from './ui/spinner'
 import { useState } from 'react'
-import { FormSubmitEvent } from '../types'
+import { useAction } from '@/lib/next-server-query/use-action'
 import { Input as NInput } from './ui/input'
-import { useAction } from '@/lib/next-server-action/use-action'
+import { FormSubmitEvent } from '../types'
 
 const Form = tw.form`
   flex
@@ -39,9 +39,9 @@ export function TodoForm() {
   const [todoText, setTodoText] = useState('')
   const addTodoAction = useAction(addTodo)
 
-  function handleSubmit(event: FormSubmitEvent) {
+  async function handleSubmit(event: FormSubmitEvent) {
     event.preventDefault()
-    addTodoAction.run(todoText)
+    await addTodoAction.run(todoText)
     setTodoText('')
   }
 
