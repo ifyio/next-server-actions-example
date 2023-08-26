@@ -1,7 +1,7 @@
-import { Action } from '@/lib/next-server-query/types'
+import { Addon } from '../addon'
 import { ActionError } from '@/lib/next-server-query/action-error'
 
-export function HandleError(action: Action) {
+export const HandleError: Addon = ({ action }) => {
   return async (...args: any[]) => {
     try {
       return await action(...args)

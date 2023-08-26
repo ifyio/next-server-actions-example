@@ -2,7 +2,7 @@
 
 import { query } from '@/lib/next-server-query/query'
 import { mutation } from '@/lib/next-server-query/mutation'
-import { ArgsMatch } from './decorators/args-match'
+import { ArgsMatch } from './addons/args-match'
 import { revalidate } from '@/lib/next-server-query/revalidate'
 import { todoService } from './services'
 import { ClearTodoArgs, ClearTodoArgsSchema } from './schemas'
@@ -29,7 +29,7 @@ export const deleteTodo = mutation({
 })
 
 export const clearTodo = mutation({
-  decorators: [ArgsMatch(ClearTodoArgsSchema)],
+  addons: [ArgsMatch(ClearTodoArgsSchema)],
   action: async (args: ClearTodoArgs) => {
     await todoService.clearTodo(args)
     revalidate(getTodos)

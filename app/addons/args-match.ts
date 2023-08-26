@@ -1,9 +1,9 @@
-import { Action } from '@/lib/next-server-query/types'
+import { Addon } from '@/lib/next-server-query/addon'
 import { ActionError } from '@/lib/next-server-query/action-error'
 import { ZodError, ZodSchema } from 'zod'
 
 export function ArgsMatch(schema: ZodSchema) {
-  return (action: Action) => {
+  const decorator: Addon = ({ action }) => {
     return async (...args: any[]) => {
       try {
         schema.parse(args[0])
@@ -19,4 +19,5 @@ export function ArgsMatch(schema: ZodSchema) {
       }
     }
   }
+  return decorator
 }

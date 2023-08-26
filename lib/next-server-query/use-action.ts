@@ -6,7 +6,7 @@ export function useAction<A extends Callback>(action: A) {
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<unknown | null>(null)
 
-  async function run(...args: Parameters<A>) {
+  function run(...args: Parameters<A>) {
     let promise: Promise<any>
     startTransition(() => {
       promise = action(...args)
@@ -21,8 +21,12 @@ export function useAction<A extends Callback>(action: A) {
           setError(error)
         })
     })
-    await promise!
+    return promise!
   }
 
-  return { run, isPending, error }
+  function reset() {
+    setError(null)
+  }
+
+  return { run, isPending, error, reset }
 }
