@@ -19,7 +19,6 @@ export function mutation<A extends Callback>(config: MutationConfig<A>) {
     const $action = createActionWithAddons({
       addons: [...addons, HandleError],
       action,
-      config,
     })
     const result = await $action(...args)
     if (invalidates) revalidateTag(invalidates.tag)

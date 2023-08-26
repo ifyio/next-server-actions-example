@@ -1,6 +1,6 @@
 import { Action } from './types'
-// TODO: Sort out the typing for this
-export type Config = { [key: string]: any }
+
+// export type Config = { [key: string]: any }
 
 export const SKIP = Symbol('SKIP')
 export const CONTINUE = Symbol('CONTINUE')
@@ -13,33 +13,35 @@ export type ActionResult = {
 
 export interface AddonArgs {
   action: Action
-  config: Config
+  // config: Config
 }
 
-export type Addon = (args: AddonArgs) => Action
+export interface Addon {
+  execute: (args: AddonArgs) => Action
+}
 
 export interface CreateDecoratedFunctionArgs {
   addons: Addon[]
   action: Action
-  config: Config
+  // config: Config
 }
 
 export function createActionWithAddons(
   args: CreateDecoratedFunctionArgs
 ): Action {
-  // If no decorators are provided, return the original action function
+  // If no addons are provided, return the original action function
   if (args.addons.length === 0) {
     return args.action
   }
 
-  return args.addons.reduce((decoratedAction, decorator) => {
+  return args.addons.reduce((decoratedAction, addon) => {
     return async (...callArgs: any[]) => {
-      const result = await decorator({
+      const result = await addon.execute({
         action: decoratedAction,
-        config: args.config,
+        // config: args.config,
       })(...callArgs)
 
-      // Check if the decorator returned an object with a status field
+      // Check if the addon returned an object with a status field
       if (result && typeof result === 'object' && 'status' in result) {
         if (result.status === TERMINATE) {
           return result.result
@@ -54,7 +56,7 @@ export function createActionWithAddons(
         }
       }
 
-      // Fallback for decorators that don't return an object with a status field
+      // Fallback for addons that don't return an object with a status field
       return result
     }
   }, args.action)
