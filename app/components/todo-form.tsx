@@ -16,6 +16,8 @@ const Form = tw.form`
 
 const Input = tw(NInput)`
   border-gray-300
+  dark:border-white
+  dark:border-opacity-20
   placeholder-gray-100
   placeholder:opacity-30
   text-lg

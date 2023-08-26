@@ -17,6 +17,8 @@ const Root = tw.div<RootProps>`
   h-[100px]
   border-b
   border-gray-300
+  dark:border-white
+  dark:border-opacity-20
   flex
   items-center
   space-x-4

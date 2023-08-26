@@ -18,7 +18,7 @@ const Header = tw.header`
   justify-end
   fixed
   w-full
-  bg-white
+  bg-background
 `
 
 const Main = tw.main`

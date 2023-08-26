@@ -1,5 +1,3 @@
-import 'server-only'
-
 import { ZodIssue } from 'zod'
 
 type ActionErrorType = 'authentication' | 'validation' | 'unknown'
@@ -46,4 +44,15 @@ export class ActionError extends Error {
       issues: this.issues,
     }
   }
+}
+
+export function isActionError(
+  response: unknown
+): response is ActionErrorResponse {
+  return (
+    typeof response === 'object' &&
+    response !== null &&
+    'status' in response &&
+    response['status'] === 'error'
+  )
 }
