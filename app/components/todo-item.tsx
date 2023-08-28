@@ -6,7 +6,7 @@ import { Spinner } from './ui/spinner'
 import { Checkbox } from './ui/checkbox'
 import { HTMLProps } from 'react'
 import { clearTodo } from '../actions'
-import { useAction } from '@/lib/next-server-query/use-action'
+import { useAction } from 'next-server-query/client'
 import { TodoItemDeleteButton } from './todo-item-delete-button'
 
 type RootProps = {

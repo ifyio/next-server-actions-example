@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components'
 import { X } from 'lucide-react'
 import { Button } from './ui/button'
 import { Spinner } from './ui/spinner'
-import { useAction } from '@/lib/next-server-query/use-action'
+import { useAction } from 'next-server-query/client'
 import { deleteTodo } from '../actions'
 
 const CloseIcon = tw(X)`w-4 h-4`

@@ -4,7 +4,7 @@ import tw from 'tailwind-styled-components'
 import { addTodo } from '../actions'
 import { Spinner } from './ui/spinner'
 import { useState } from 'react'
-import { useAction } from '@/lib/next-server-query/use-action'
+import { useAction } from 'next-server-query/client'
 import { Input as NInput } from './ui/input'
 import { FormSubmitEvent } from '../types'
 

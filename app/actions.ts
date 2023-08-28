@@ -1,37 +1,36 @@
 'use server'
 
-import { query } from '@/lib/next-server-query/query'
-import { mutation } from '@/lib/next-server-query/mutation'
 import { ArgsMatch } from './addons/args-match'
-import { revalidate } from '@/lib/next-server-query/revalidate'
 import { todoService } from './services'
+import { revalidateTag } from 'next/cache'
+import { query, mutator } from 'next-server-query'
 import { ClearTodoArgs, ClearTodoArgsSchema } from './schemas'
 
 export const getTodos = query({
-  tag: 'todos',
+  tags: ['todos'],
   action: () => {
     return todoService.getTodos()
   },
 })
 
-export const addTodo = mutation({
+export const addTodo = mutator({
   action: async (title: string) => {
     await todoService.addTodo(title)
-    revalidate(getTodos)
+    revalidateTag('todos')
   },
 })
 
-export const deleteTodo = mutation({
+export const deleteTodo = mutator({
   action: async (id: string) => {
     await todoService.deleteTodo(id)
-    revalidate(getTodos)
+    revalidateTag('todos')
   },
 })
 
-export const clearTodo = mutation({
+export const clearTodo = mutator({
   addons: [ArgsMatch(ClearTodoArgsSchema)],
   action: async (args: ClearTodoArgs) => {
     await todoService.clearTodo(args)
-    revalidate(getTodos)
+    revalidateTag('todos')
   },
 })

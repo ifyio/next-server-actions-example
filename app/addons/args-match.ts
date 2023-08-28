@@ -1,5 +1,4 @@
-import { Addon } from '@/lib/next-server-query/addon'
-import { ActionError } from '@/lib/next-server-query/action-error'
+import { Addon, ActionError } from 'next-server-query'
 import { ZodError, ZodSchema } from 'zod'
 
 export function ArgsMatch(schema: ZodSchema) {
