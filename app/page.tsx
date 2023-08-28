@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { TodoForm } from './components/todo-form'
 import { TodoList } from './components/todo-list'
 import { TodoHeaderText } from './components/todo-header-text'
+import { DarkModeSelector } from './components/dark-mode-selector'
 
 const Container = tw.div`
   container
@@ -31,7 +32,10 @@ export default async function Home() {
       <Header>
         <Container className="space-y-14">
           <Suspense fallback={<div>Loading...</div>}>
-            <TodoHeaderText />
+            <div className="flex items-center justify-between">
+              <TodoHeaderText />
+              <DarkModeSelector />
+            </div>
           </Suspense>
           <TodoForm />
         </Container>

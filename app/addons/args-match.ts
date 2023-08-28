@@ -13,7 +13,7 @@ export function ArgsMatch(schema: ZodSchema) {
             throw new ActionError({
               message: 'The supplied args are invalid',
               type: 'validation',
-              data: error.issues,
+              issues: error.issues,
             })
           }
         }
