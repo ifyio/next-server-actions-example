@@ -1,7 +1,7 @@
 import { Addon, ActionError } from 'next-server-query'
 import { ZodError, ZodSchema } from 'zod'
 
-export function ArgsMatch(schema: ZodSchema) {
+export function ensureArgsMatch(schema: ZodSchema) {
   const addon: Addon = {
     execute: ({ action }) => {
       return async (...args: any[]) => {

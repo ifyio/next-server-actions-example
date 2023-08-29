@@ -1,7 +1,7 @@
 import './globals.css'
 import { ReactNode } from 'react'
 import type { Metadata } from 'next'
-import { DarkModeFlashGuard } from './components/dark-mode-flash-guard'
+import Providers from './providers'
 
 export const metadata: Metadata = {
   title: 'Todo App',
@@ -14,9 +14,8 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className="light">
-        <DarkModeFlashGuard />
-        {children}
+      <body>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

@@ -1,14 +1,15 @@
 'use client'
 
-import { Moon, SunMoon } from 'lucide-react'
 import { Button } from './ui/button'
+import { useDarkMode } from '@/lib/dark-mode/use-dark-mode'
+import { Moon, SunMoon } from 'lucide-react'
+
 import {
   DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuContent,
 } from './ui/dropdown-menu'
-import { useDarkMode } from '../hooks/use-dark-mode'
 
 export function DarkModeSelector() {
   const { mode, setMode } = useDarkMode()

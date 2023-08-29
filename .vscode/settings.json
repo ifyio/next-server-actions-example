@@ -4,6 +4,7 @@
     "tailwindcss",
     "unpromisify",
     "lucide",
+    "syncer",
     "todos"
   ]
 }

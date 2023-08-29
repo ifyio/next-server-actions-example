@@ -1,9 +1,9 @@
 'use server'
 
-import { ArgsMatch } from './addons/args-match'
 import { todoService } from './services'
 import { revalidateTag } from 'next/cache'
 import { query, mutator } from 'next-server-query'
+import { ensureArgsMatch } from './addons/ensure-args-match'
 import { ClearTodoArgs, ClearTodoArgsSchema } from './schemas'
 
 export const getTodos = query({
@@ -28,7 +28,7 @@ export const deleteTodo = mutator({
 })
 
 export const clearTodo = mutator({
-  addons: [ArgsMatch(ClearTodoArgsSchema)],
+  addons: [ensureArgsMatch(ClearTodoArgsSchema)],
   action: async (args: ClearTodoArgs) => {
     await todoService.clearTodo(args)
     revalidateTag('todos')
