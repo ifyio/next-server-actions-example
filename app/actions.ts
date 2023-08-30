@@ -28,7 +28,7 @@ export const deleteTodo = mutator({
 })
 
 export const clearTodo = mutator({
-  addons: [ensureArgsMatch(ClearTodoArgsSchema)],
+  '@': [ensureArgsMatch(ClearTodoArgsSchema)],
   action: async (args: ClearTodoArgs) => {
     await todoService.clearTodo(args)
     revalidateTag('todos')
